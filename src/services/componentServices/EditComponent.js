@@ -27,7 +27,7 @@ const EditComponent = () => {
 
   const getComponent = async () => {
     const response = await fetch(
-      `http://localhost:8000/api/components?id=${id}`,
+      `https://coreware-backend-production.up.railway.app/api/components?id=${id}`,
       {
         method: "GET",
         headers: { "x-access-token": `${token}` },
@@ -48,14 +48,17 @@ const EditComponent = () => {
     e.preventDefault();
     const component = { idComp, brand, model, price };
 
-    fetch(`http://localhost:8000/api/components?id=${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": `${token}`,
-      },
-      body: JSON.stringify(component),
-    })
+    fetch(
+      `https://coreware-backend-production.up.railway.app/api/components?id=${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": `${token}`,
+        },
+        body: JSON.stringify(component),
+      }
+    )
       .then(() => {
         navigate(-1);
       })

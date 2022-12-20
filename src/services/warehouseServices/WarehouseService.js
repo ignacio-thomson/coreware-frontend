@@ -23,7 +23,7 @@ const WarehousesWidget = () => {
 
   const deleteWarehouse = async (id) => {
     const response = await fetch(
-      `http://localhost:8000/api/warehouses?id=${id}`,
+      `https://coreware-backend-production.up.railway.app/api/warehouses?id=${id}`,
       {
         method: "DELETE",
         headers: { "x-access-token": `${token}` },
@@ -48,10 +48,13 @@ const WarehousesWidget = () => {
   };
 
   const getWarehouses = async () => {
-    const response = await fetch(`http://localhost:8000/api/warehouses/`, {
-      method: "GET",
-      headers: { "x-access-token": `${token}` },
-    });
+    const response = await fetch(
+      `https://coreware-backend-production.up.railway.app/api/warehouses/`,
+      {
+        method: "GET",
+        headers: { "x-access-token": `${token}` },
+      }
+    );
     const { warehouses } = await response.json();
     setWarehouse(warehouses);
   };

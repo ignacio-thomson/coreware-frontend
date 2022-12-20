@@ -21,14 +21,17 @@ const AddWarehouse = () => {
   const { palette } = useTheme();
 
   const handleFormSubmit = async (values) => {
-    await fetch(`http://localhost:8000/api/warehouses`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": `${token}`,
-      },
-      body: JSON.stringify(values),
-    })
+    await fetch(
+      `https://coreware-backend-production.up.railway.app/api/warehouses`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": `${token}`,
+        },
+        body: JSON.stringify(values),
+      }
+    )
       .then(() => {
         navigate(-1);
       })

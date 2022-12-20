@@ -23,7 +23,7 @@ const DistributorsWidget = () => {
 
   const deleteDistributor = async (id) => {
     const response = await fetch(
-      `http://localhost:8000/api/distributors?id=${id}`,
+      `https://coreware-backend-production.up.railway.app/api/distributors?id=${id}`,
       {
         method: "DELETE",
         headers: { "x-access-token": `${token}` },
@@ -48,10 +48,13 @@ const DistributorsWidget = () => {
   };
 
   const getDistributors = async () => {
-    const response = await fetch(`http://localhost:8000/api/distributors/`, {
-      method: "GET",
-      headers: { "x-access-token": `${token}` },
-    });
+    const response = await fetch(
+      `https://coreware-backend-production.up.railway.app/api/distributors/`,
+      {
+        method: "GET",
+        headers: { "x-access-token": `${token}` },
+      }
+    );
     const { distributors } = await response.json();
     setDistributor(distributors);
   };

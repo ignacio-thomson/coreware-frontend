@@ -32,7 +32,7 @@ const ComponentsWidget = () => {
 
   const deleteComponent = async (id) => {
     const response = await fetch(
-      `http://localhost:8000/api/components?id=${id}`,
+      `https://coreware-backend-production.up.railway.app/api/components?id=${id}`,
       {
         method: "DELETE",
         headers: { "x-access-token": `${token}` },
@@ -57,10 +57,13 @@ const ComponentsWidget = () => {
   };
 
   const getComponent = async () => {
-    const response = await fetch(`http://localhost:8000/api/components/`, {
-      method: "GET",
-      headers: { "x-access-token": `${token}` },
-    });
+    const response = await fetch(
+      `https://coreware-backend-production.up.railway.app/api/components/`,
+      {
+        method: "GET",
+        headers: { "x-access-token": `${token}` },
+      }
+    );
     const { components } = await response.json();
     setComponent(components);
   };

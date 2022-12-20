@@ -27,7 +27,7 @@ const EditWarehouse = () => {
 
   const getWarehouse = async () => {
     const response = await fetch(
-      `http://localhost:8000/api/warehouses?id=${id}`,
+      `https://coreware-backend-production.up.railway.app/api/warehouses?id=${id}`,
       {
         method: "GET",
         headers: { "x-access-token": `${token}` },
@@ -47,14 +47,17 @@ const EditWarehouse = () => {
     e.preventDefault();
     const warehouse = { idWare, name, location };
 
-    fetch(`http://localhost:8000/api/warehouses?id=${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": `${token}`,
-      },
-      body: JSON.stringify(warehouse),
-    })
+    fetch(
+      `https://coreware-backend-production.up.railway.app/api/warehouses?id=${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": `${token}`,
+        },
+        body: JSON.stringify(warehouse),
+      }
+    )
       .then(() => {
         navigate(-1);
       })

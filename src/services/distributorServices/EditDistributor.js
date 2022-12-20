@@ -26,7 +26,7 @@ const EditDistributor = () => {
 
   const getDistributor = async () => {
     const response = await fetch(
-      `http://localhost:8000/api/distributors?id=${id}`,
+      `https://coreware-backend-production.up.railway.app/api/distributors?id=${id}`,
       {
         method: "GET",
         headers: { "x-access-token": `${token}` },
@@ -46,14 +46,17 @@ const EditDistributor = () => {
     e.preventDefault();
     const distributor = { idDist, name, address };
 
-    fetch(`http://localhost:8000/api/distributors?id=${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": `${token}`,
-      },
-      body: JSON.stringify(distributor),
-    })
+    fetch(
+      `https://coreware-backend-production.up.railway.app/api/distributors?id=${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": `${token}`,
+        },
+        body: JSON.stringify(distributor),
+      }
+    )
       .then(() => {
         navigate(-1);
       })
