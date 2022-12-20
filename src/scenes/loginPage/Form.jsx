@@ -7,18 +7,14 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "state";
 // import Dropzone from "react-dropzone";
-import FlexBetween from "components/FlexBetween";
-import { FormatIndentDecreaseSharp } from "@mui/icons-material";
 import { login } from "services/AuthService";
 import { register } from "services/RegisterService";
-import session from "redux-persist/lib/storage/session";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -26,6 +22,15 @@ const registerSchema = yup.object().shape({
   age: yup.number().required("required"),
   email: yup.string().email("Invalid email").required("required"),
   password: yup.string().required("required"),
+  confirm: yup
+    .string()
+    .when("password", {
+      is: (value) => (value && value.length > 0 ? true : false),
+      then: yup
+        .string()
+        .oneOf([yup.ref("password")], "Password must be identical"),
+    })
+    .required("You must confirm your password"),
 });
 
 const loginSchema = yup.object().shape({
@@ -39,6 +44,7 @@ const initialValuesRegister = {
   age: "",
   email: "",
   password: "",
+  confirm: "",
 };
 
 const initialValuesLogin = {
@@ -62,11 +68,12 @@ const Form = () => {
       if (login) {
         dispatch(
           setLogin({
-            user: loggedInResponse.data.firstName,
+            user: loggedInResponse.data.email,
             token: loggedInResponse.data.token,
           })
         );
         sessionStorage.setItem("sessionJWT", loggedInResponse.data.token);
+        sessionStorage.setItem("userName", values.email);
         navigate("/home");
       }
     }
@@ -179,9 +186,25 @@ const Form = () => {
                 gridColumn: "span 4",
               }}
             />
-          </Box>
 
-          {/* Buttons */}
+            {isRegister && (
+              <>
+                <TextField
+                  label="Confirmar contraseña"
+                  type="password"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.confirm}
+                  name="confirm"
+                  error={Boolean(touched.confirm) && Boolean(errors.confirm)}
+                  helperText={touched.confirm && errors.confirm}
+                  sx={{
+                    gridColumn: "span 4",
+                  }}
+                />
+              </>
+            )}
+          </Box>
           <Box>
             <Button
               fullWidth

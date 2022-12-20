@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Box, useMediaQuery } from "@mui/material";
 import WidgetWrapper from "components/WidgetWrapper";
 import FlexBetween from "components/FlexBetween";
@@ -8,6 +7,10 @@ import Navbar from "scenes/navbar";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { Button, TextField, Typography, useTheme } from "@mui/material";
+import FlexCenter from "components/FlexCenter";
+import Image from "mui-image";
+import pic from "../../assets/img/undraw_engineering_team_a7n2.svg";
+import Footer from "scenes/footer";
 
 const AddDistributor = () => {
   const token = useSelector((state) => state.token);
@@ -55,6 +58,18 @@ const AddDistributor = () => {
       >
         <WidgetWrapper>
           <FlexBetween>
+            <Typography
+              fontWeight="medium"
+              fontSize="clamp(1rem, 2rem, 2.25rem)"
+              color="primary"
+              sx={{
+                m: "0 0 1rem 0",
+              }}
+            >
+              Añadir distribuidor
+            </Typography>
+          </FlexBetween>
+          <FlexBetween>
             <Formik
               onSubmit={handleFormSubmit}
               initialValues={initialValuesEdit}
@@ -75,7 +90,7 @@ const AddDistributor = () => {
                     gridTemplateColumns="repeat(4, minmax(0, 1fr))"
                     sx={{
                       "& > div": {
-                        gridColumn: isNonMobile ? undefined : "span 4",
+                        gridColumn: isNonMobile ? undefined : "span 2",
                       },
                     }}
                   >
@@ -108,7 +123,6 @@ const AddDistributor = () => {
                       }}
                     />
                   </Box>
-                  {/* Buttons */}
                   <Box>
                     <Button
                       fullWidth
@@ -130,6 +144,10 @@ const AddDistributor = () => {
           </FlexBetween>
         </WidgetWrapper>
       </Box>
+      <FlexCenter sx={{ m: "5rem 0 10rem 0" }}>
+        <Image src={pic} width={isNonMobileScreens ? "35%" : "100%"} />
+      </FlexCenter>
+      <Footer />
     </Box>
   );
 };

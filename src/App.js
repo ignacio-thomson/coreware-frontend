@@ -1,8 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "scenes/homePage";
 import LoginPage from "scenes/loginPage";
-import RegisterPage from "scenes/registerPage";
-import ProfilePage from "scenes/profilePage";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -19,6 +17,8 @@ function App() {
   const mode = useSelector((state) => state.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
+  // Defining the routes used in the application and the them that is going to be used. (Also saving the choice)
+
   return (
     <div className="app">
       <BrowserRouter>
@@ -26,9 +26,7 @@ function App() {
           <CssBaseline />
           <Routes>
             <Route path="/" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
             <Route path="/home" element={<HomePage />} />
-            <Route path="/profile/:userId" element={<ProfilePage />} />
             <Route path="/editcomponent/:id" element={<EditComponent />} />
             <Route path="/editwarehouse/:id" element={<EditWarehouse />} />
             <Route path="/editdistributor/:id" element={<EditDistributor />} />

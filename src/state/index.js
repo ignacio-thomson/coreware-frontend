@@ -6,7 +6,7 @@ const initialState = {
   token: null,
 };
 
-// All the logic needed for the application for Redux.
+// Some of the logic needed for the application in Redux, setting dark mode or setting the log in data.
 
 export const authSlice = createSlice({
   name: "auth",
@@ -19,12 +19,8 @@ export const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
-    setLogout: (state) => {
-      state.user = null;
-      state.token = null;
-    },
   },
 });
 
-export const { setMode, setLogin, setLogout } = authSlice.actions;
+export const { setMode, setLogin } = authSlice.actions;
 export default authSlice.reducer;

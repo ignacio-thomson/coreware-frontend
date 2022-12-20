@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@coreui/coreui": "^4.2.4",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
@@ -16,6 +17,8 @@
     "bootstrap": "^5.2.3",
     "dotenv": "^16.0.3",
     "formik": "^2.2.9",
+    "mdb-react-ui-kit": "^5.1.0",
+    "mui-image": "^1.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-paginate": "^8.1.4",

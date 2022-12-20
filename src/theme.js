@@ -1,3 +1,5 @@
+// File used to define most of the theme related stuff for the application.
+
 export const colorTokens = {
   grey: {
     0: "#FFFFFF",

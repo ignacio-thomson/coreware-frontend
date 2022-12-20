@@ -1,16 +1,13 @@
 import {
-  ManageAccountsOutlined,
-  EditOutlined,
-  LocationOnOutlined,
-  WorkOutlineOutlined,
-} from "@mui/icons-material";
-import {
   Box,
   Typography,
-  Divider,
   useTheme,
   Button,
   TablePagination,
+  Card,
+  CardContent,
+  CardActions,
+  useMediaQuery,
 } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import { useSelector } from "react-redux";
@@ -21,25 +18,17 @@ import * as React from "react";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import WidgetWrapper from "components/WidgetWrapper";
 
 const ComponentsWidget = () => {
   const [component, setComponent] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [postsPerPage, setPostsPerPage] = useState(5);
-  const [id, setId] = useState("");
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [price, setPrice] = useState(0);
+  const [postsPerPage, setPostsPerPage] = useState(8);
   const { palette } = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
-  const dark = palette.neutral.dark;
-  const medium = palette.neutral.medium;
-  const main = palette.neutral.main;
+  const isNonMobile = useMediaQuery("(min-width: 600px)");
 
   const deleteComponent = async (id) => {
     const response = await fetch(
@@ -85,6 +74,11 @@ const ComponentsWidget = () => {
     setCurrentPage(0);
   };
 
+  const emptyRows =
+    currentPage > 0
+      ? Math.max(0, (1 + currentPage) * postsPerPage - component.length)
+      : 0;
+
   useEffect(() => {
     getComponent();
   }, []);
@@ -95,52 +89,81 @@ const ComponentsWidget = () => {
 
   return (
     <WidgetWrapper>
+      <FlexBetween>
+        <Typography
+          fontWeight="medium"
+          fontSize="clamp(1rem, 2rem, 2.25rem)"
+          color="primary"
+          sx={{
+            m: "0 0 0.5rem 1rem",
+          }}
+        >
+          Componentes
+        </Typography>
+      </FlexBetween>
       <FlexBetween gap="1.5rem" pb="1.5rem">
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 800 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>ID</TableCell>
-                <TableCell align="right">Marca</TableCell>
-                <TableCell align="right">Modelo</TableCell>
-                <TableCell align="right">Precio</TableCell>
-                <TableCell align="center">Acciones</TableCell>
-              </TableRow>
-            </TableHead>
+        <TableContainer>
+          <Table>
             <TableBody>
-              {component
-                .slice(
-                  currentPage * postsPerPage,
-                  currentPage * postsPerPage + postsPerPage
-                )
-                .map((row) => (
-                  <TableRow
-                    key={row._id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {row._id}
-                    </TableCell>
-                    <TableCell align="right">{row.brand}</TableCell>
-                    <TableCell align="right">{row.model}</TableCell>
-                    <TableCell align="right">{row.price}</TableCell>
-                    <TableCell align="right">
-                      <Button onClick={() => handleUpdate(row._id)}>
-                        Editar
-                      </Button>
-                      <Button onClick={() => handleDelete(row._id)}>
-                        Eliminar
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
+              <Box
+                display="grid"
+                gap="30px"
+                gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                sx={{
+                  "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+                }}
+              >
+                {component
+                  .slice(
+                    currentPage * postsPerPage,
+                    currentPage * postsPerPage + postsPerPage
+                  )
+                  .map((row) => (
+                    <Card sx={{ minWidth: 275, m: "0.5rem" }}>
+                      <CardContent>
+                        <Typography
+                          sx={{ fontSize: 14 }}
+                          color="text.secondary"
+                          gutterBottom
+                        >
+                          Marca: {row.brand}
+                        </Typography>
+                        <Typography variant="h5" component="div">
+                          Modelo: {row.model}
+                        </Typography>
+                        <Typography variant="body2">
+                          Precio: {row.price}
+                        </Typography>
+                      </CardContent>
+
+                      <CardActions sx={{ justifyContent: "end" }}>
+                        <Button onClick={() => handleUpdate(row._id)}>
+                          Editar
+                        </Button>
+                        <Button onClick={() => handleDelete(row._id)}>
+                          Eliminar
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  ))}
+              </Box>
+              {emptyRows > 0 && (
+                <TableRow
+                  style={{
+                    height:
+                      postsPerPage === 8 ? 31.9 * emptyRows : 41 * emptyRows,
+                  }}
+                >
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
             </TableBody>
           </Table>
           <FlexBetween>
             <Button
               variant="contained"
               sx={{
-                m: "0.75rem",
+                m: "1rem 0 0 0.50rem",
                 backgroundColor: palette.primary.main,
                 color: palette.background.alt,
                 "&:hover": { color: palette.primary.main },
@@ -150,7 +173,7 @@ const ComponentsWidget = () => {
               Añadir componente
             </Button>
             <TablePagination
-              rowsPerPageOptions={[5, 10, 15]}
+              rowsPerPageOptions={[8, 16, 24]}
               component="div"
               count={component.length}
               rowsPerPage={postsPerPage}

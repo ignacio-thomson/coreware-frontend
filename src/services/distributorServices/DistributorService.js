@@ -1,17 +1,4 @@
-import {
-  ManageAccountsOutlined,
-  EditOutlined,
-  LocationOnOutlined,
-  WorkOutlineOutlined,
-} from "@mui/icons-material";
-import {
-  Box,
-  Typography,
-  Divider,
-  useTheme,
-  Button,
-  TablePagination,
-} from "@mui/material";
+import { Typography, useTheme, Button, TablePagination } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -25,7 +12,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import WidgetWrapper from "components/WidgetWrapper";
-import AddComponent from "services/componentServices/AddComponent";
 
 const DistributorsWidget = () => {
   const [distributor, setDistributor] = useState([]);
@@ -34,9 +20,6 @@ const DistributorsWidget = () => {
   const { palette } = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
-  const dark = palette.neutral.dark;
-  const medium = palette.neutral.medium;
-  const main = palette.neutral.main;
 
   const deleteDistributor = async (id) => {
     const response = await fetch(
@@ -82,6 +65,11 @@ const DistributorsWidget = () => {
     setCurrentPage(0);
   };
 
+  const emptyRows =
+    currentPage > 0
+      ? Math.max(0, (1 + currentPage) * postsPerPage - distributor.length)
+      : 0;
+
   useEffect(() => {
     getDistributors();
   }, []);
@@ -92,6 +80,18 @@ const DistributorsWidget = () => {
 
   return (
     <WidgetWrapper>
+      <FlexBetween>
+        <Typography
+          fontWeight="medium"
+          fontSize="clamp(1rem, 2rem, 2.25rem)"
+          color="primary"
+          sx={{
+            m: "0 0 0.5rem 1rem",
+          }}
+        >
+          Distribuidores
+        </Typography>
+      </FlexBetween>
       <FlexBetween gap="1.5rem" pb="1.5rem">
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 800 }} aria-label="simple table">
@@ -129,13 +129,23 @@ const DistributorsWidget = () => {
                     </TableCell>
                   </TableRow>
                 ))}
+              {emptyRows > 0 && (
+                <TableRow
+                  style={{
+                    height:
+                      postsPerPage === 5 ? 65.5 * emptyRows : 65.8 * emptyRows,
+                  }}
+                >
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
             </TableBody>
           </Table>
           <FlexBetween>
             <Button
               variant="contained"
               sx={{
-                m: "0.75rem",
+                m: "1rem",
                 backgroundColor: palette.primary.main,
                 color: palette.background.alt,
                 "&:hover": { color: palette.primary.main },

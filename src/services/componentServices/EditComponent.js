@@ -5,9 +5,13 @@ import { Box, useMediaQuery } from "@mui/material";
 import WidgetWrapper from "components/WidgetWrapper";
 import FlexBetween from "components/FlexBetween";
 import Navbar from "scenes/navbar";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik } from "formik";
 import * as yup from "yup";
 import { Button, TextField, Typography, useTheme } from "@mui/material";
+import pic from "../../assets/img/undraw_react_re_g3ui.svg";
+import Footer from "scenes/footer";
+import FlexCenter from "components/FlexCenter";
+import Image from "mui-image";
 
 const EditComponent = () => {
   const [idComp, setIdComp] = useState();
@@ -84,6 +88,18 @@ const EditComponent = () => {
       >
         <WidgetWrapper>
           <FlexBetween>
+            <Typography
+              fontWeight="medium"
+              fontSize="clamp(1rem, 2rem, 2.25rem)"
+              color="primary"
+              sx={{
+                m: "0 0 1rem 0",
+              }}
+            >
+              Editar componente
+            </Typography>
+          </FlexBetween>
+          <FlexBetween>
             <Formik
               onSubmit={handleSubmit}
               initialValues={initialValuesEdit}
@@ -97,7 +113,7 @@ const EditComponent = () => {
                     gridTemplateColumns="repeat(4, minmax(0, 1fr))"
                     sx={{
                       "& > div": {
-                        gridColumn: isNonMobile ? undefined : "span 4",
+                        gridColumn: isNonMobile ? undefined : "span 2",
                       },
                     }}
                   >
@@ -145,7 +161,6 @@ const EditComponent = () => {
                       }}
                     />
                   </Box>
-                  {/* Buttons */}
                   <Box>
                     <Button
                       fullWidth
@@ -167,6 +182,10 @@ const EditComponent = () => {
           </FlexBetween>
         </WidgetWrapper>
       </Box>
+      <FlexCenter sx={{ m: "5rem" }}>
+        <Image src={pic} width={isNonMobileScreens ? "35%" : "100%"} />
+      </FlexCenter>
+      <Footer />
     </Box>
   );
 };

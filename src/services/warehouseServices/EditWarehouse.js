@@ -5,10 +5,14 @@ import { Box, useMediaQuery } from "@mui/material";
 import WidgetWrapper from "components/WidgetWrapper";
 import FlexBetween from "components/FlexBetween";
 import Navbar from "scenes/navbar";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik } from "formik";
 import * as yup from "yup";
 import { Button, TextField, Typography, useTheme } from "@mui/material";
-import { CheckBox } from "@mui/icons-material";
+
+import pic from "../../assets/img/undraw_dev_productivity_re_fylf.svg";
+import Footer from "scenes/footer";
+import FlexCenter from "components/FlexCenter";
+import Image from "mui-image";
 
 const EditWarehouse = () => {
   const [idWare, setIdWare] = useState();
@@ -82,6 +86,18 @@ const EditWarehouse = () => {
       >
         <WidgetWrapper>
           <FlexBetween>
+            <Typography
+              fontWeight="medium"
+              fontSize="clamp(1rem, 2rem, 2.25rem)"
+              color="primary"
+              sx={{
+                m: "0 0 1rem 0",
+              }}
+            >
+              Editar bodega
+            </Typography>
+          </FlexBetween>
+          <FlexBetween>
             <Formik
               onSubmit={handleSubmit}
               initialValues={initialValuesEdit}
@@ -95,7 +111,7 @@ const EditWarehouse = () => {
                     gridTemplateColumns="repeat(4, minmax(0, 1fr))"
                     sx={{
                       "& > div": {
-                        gridColumn: isNonMobile ? undefined : "span 4",
+                        gridColumn: isNonMobile ? undefined : "span 2",
                       },
                     }}
                   >
@@ -110,7 +126,7 @@ const EditWarehouse = () => {
                       error={Boolean(touched.name) && Boolean(errors.name)}
                       helperText={touched.name && errors.name}
                       sx={{
-                        gridColumn: "span 1",
+                        gridColumn: "span 2",
                       }}
                     />
                     <TextField
@@ -130,7 +146,6 @@ const EditWarehouse = () => {
                       }}
                     />
                   </Box>
-                  {/* Buttons */}
                   <Box>
                     <Button
                       fullWidth
@@ -152,6 +167,10 @@ const EditWarehouse = () => {
           </FlexBetween>
         </WidgetWrapper>
       </Box>
+      <FlexCenter sx={{ m: "5rem" }}>
+        <Image src={pic} width={isNonMobileScreens ? "35%" : "100%"} />
+      </FlexCenter>
+      <Footer />
     </Box>
   );
 };

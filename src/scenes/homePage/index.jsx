@@ -1,4 +1,6 @@
 import { Box, useMediaQuery } from "@mui/material";
+import Footer from "scenes/footer";
+import Hero from "scenes/hero";
 import Navbar from "scenes/navbar";
 import ComponentWidget from "services/componentServices/ComponentService";
 import DistributorsWidget from "services/distributorServices/DistributorService";
@@ -10,6 +12,7 @@ const HomePage = () => {
   return (
     <Box>
       <Navbar />
+      <Hero />
       <Box
         width="100%"
         padding="2rem 6%"
@@ -18,7 +21,6 @@ const HomePage = () => {
         justifyContent="center"
       >
         <ComponentWidget />
-        {/* <Box flexBasis={isNonMobileScreens ? "26%" : undefined}></Box> */}
       </Box>
       <Box
         width="100%"
@@ -28,7 +30,6 @@ const HomePage = () => {
         justifyContent="center"
       >
         <DistributorsWidget />
-        {/* <Box flexBasis={isNonMobileScreens ? "26%" : undefined}></Box> */}
       </Box>
       <Box
         width="100%"
@@ -38,8 +39,8 @@ const HomePage = () => {
         justifyContent="center"
       >
         <WarehousesWidget />
-        {/* <Box flexBasis={isNonMobileScreens ? "26%" : undefined}></Box> */}
       </Box>
+      <Footer />
     </Box>
   );
 };

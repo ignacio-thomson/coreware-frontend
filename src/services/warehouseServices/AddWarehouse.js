@@ -8,6 +8,10 @@ import Navbar from "scenes/navbar";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { Button, TextField, Typography, useTheme } from "@mui/material";
+import FlexCenter from "components/FlexCenter";
+import Image from "mui-image";
+import pic from "../../assets/img/undraw_engineering_team_a7n2.svg";
+import Footer from "scenes/footer";
 
 const AddWarehouse = () => {
   const token = useSelector((state) => state.token);
@@ -55,6 +59,18 @@ const AddWarehouse = () => {
       >
         <WidgetWrapper>
           <FlexBetween>
+            <Typography
+              fontWeight="medium"
+              fontSize="clamp(1rem, 2rem, 2.25rem)"
+              color="primary"
+              sx={{
+                m: "0 0 1rem 0",
+              }}
+            >
+              Añadir bodega
+            </Typography>
+          </FlexBetween>
+          <FlexBetween>
             <Formik
               onSubmit={handleFormSubmit}
               initialValues={initialValuesEdit}
@@ -75,7 +91,7 @@ const AddWarehouse = () => {
                     gridTemplateColumns="repeat(4, minmax(0, 1fr))"
                     sx={{
                       "& > div": {
-                        gridColumn: isNonMobile ? undefined : "span 4",
+                        gridColumn: isNonMobile ? undefined : "span 2",
                       },
                     }}
                   >
@@ -108,7 +124,6 @@ const AddWarehouse = () => {
                       }}
                     />
                   </Box>
-                  {/* Buttons */}
                   <Box>
                     <Button
                       fullWidth
@@ -130,6 +145,10 @@ const AddWarehouse = () => {
           </FlexBetween>
         </WidgetWrapper>
       </Box>
+      <FlexCenter sx={{ m: "5rem 0 10rem 0" }}>
+        <Image src={pic} width={isNonMobileScreens ? "35%" : "100%"} />
+      </FlexCenter>
+      <Footer />
     </Box>
   );
 };

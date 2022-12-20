@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Form, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Box, useMediaQuery } from "@mui/material";
 import WidgetWrapper from "components/WidgetWrapper";
 import FlexBetween from "components/FlexBetween";
 import Navbar from "scenes/navbar";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik } from "formik";
 import * as yup from "yup";
 import { Button, TextField, Typography, useTheme } from "@mui/material";
-import { CheckBox } from "@mui/icons-material";
+import pic from "../../assets/img/undraw_dev_productivity_re_fylf.svg";
+import Footer from "scenes/footer";
+import FlexCenter from "components/FlexCenter";
+import Image from "mui-image";
 
 const EditDistributor = () => {
   const [idDist, setIdDist] = useState();
@@ -71,16 +74,28 @@ const EditDistributor = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{ justifyContent: "center", alignItems: "center" }}>
       <Navbar />
       <Box
         width="100%"
         padding="2rem 6%"
         display={isNonMobileScreens ? "flex" : "block"}
         gap="0.5rem"
-        justifyContent="center"
+        sx={{ justifyContent: "center", alignItems: "center" }}
       >
         <WidgetWrapper>
+          <FlexBetween>
+            <Typography
+              fontWeight="medium"
+              fontSize="clamp(1rem, 2rem, 2.25rem)"
+              color="primary"
+              sx={{
+                m: "0 0 1rem 0",
+              }}
+            >
+              Editar distribuidor
+            </Typography>
+          </FlexBetween>
           <FlexBetween>
             <Formik
               onSubmit={handleSubmit}
@@ -95,7 +110,7 @@ const EditDistributor = () => {
                     gridTemplateColumns="repeat(4, minmax(0, 1fr))"
                     sx={{
                       "& > div": {
-                        gridColumn: isNonMobile ? undefined : "span 4",
+                        gridColumn: isNonMobile ? undefined : "span 2",
                       },
                     }}
                   >
@@ -110,7 +125,7 @@ const EditDistributor = () => {
                       error={Boolean(touched.name) && Boolean(errors.name)}
                       helperText={touched.name && errors.name}
                       sx={{
-                        gridColumn: "span 1",
+                        gridColumn: "span 2",
                       }}
                     />
                     <TextField
@@ -130,7 +145,6 @@ const EditDistributor = () => {
                       }}
                     />
                   </Box>
-                  {/* Buttons */}
                   <Box>
                     <Button
                       fullWidth
@@ -152,6 +166,10 @@ const EditDistributor = () => {
           </FlexBetween>
         </WidgetWrapper>
       </Box>
+      <FlexCenter sx={{ m: "5rem" }}>
+        <Image src={pic} width={isNonMobileScreens ? "35%" : "100%"} />
+      </FlexCenter>
+      <Footer />
     </Box>
   );
 };
