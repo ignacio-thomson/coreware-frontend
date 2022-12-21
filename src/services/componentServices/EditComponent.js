@@ -8,7 +8,7 @@ import Navbar from "scenes/navbar";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { Button, TextField, Typography, useTheme } from "@mui/material";
-import pic from "../../assets/img/undraw_react_re_g3ui.svg";
+import pic from "../../assets/img/undraw_engineering_team_a7n2.svg";
 import Footer from "scenes/footer";
 import FlexCenter from "components/FlexCenter";
 import Image from "mui-image";
