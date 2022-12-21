@@ -125,16 +125,29 @@ const ComponentsWidget = () => {
                     <Card sx={{ minWidth: 275, m: "0.5rem" }}>
                       <CardContent>
                         <Typography
-                          sx={{ fontSize: 14 }}
-                          color="text.secondary"
+                          fontWeight={"medium"}
+                          sx={{ fontSize: 20 }}
+                          color="primary"
                           gutterBottom
                         >
                           Marca: {row.brand}
                         </Typography>
-                        <Typography variant="h5" component="div">
+                        <Typography
+                          variant="body2"
+                          fontWeight={"light"}
+                          sx={{ fontSize: 16 }}
+                          color="dark"
+                          gutterBottom
+                        >
                           Modelo: {row.model}
                         </Typography>
-                        <Typography variant="body2">
+                        <Typography
+                          variant="body2"
+                          fontWeight={"light"}
+                          sx={{ fontSize: 16 }}
+                          color="dark"
+                          gutterBottom
+                        >
                           Precio: {row.price}
                         </Typography>
                       </CardContent>

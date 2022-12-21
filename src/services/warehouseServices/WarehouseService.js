@@ -100,10 +100,16 @@ const WarehousesWidget = () => {
           <Table sx={{ minWidth: 800 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>ID</TableCell>
-                <TableCell align="right">Nombre</TableCell>
-                <TableCell align="right">Localización</TableCell>
-                <TableCell align="center">Acciones</TableCell>
+                <TableCell sx={{ fontSize: "15px" }}>ID</TableCell>
+                <TableCell align="right" sx={{ fontSize: "15px" }}>
+                  Nombre
+                </TableCell>
+                <TableCell align="right" sx={{ fontSize: "15px" }}>
+                  Localización
+                </TableCell>
+                <TableCell align="center" sx={{ fontSize: "15px" }}>
+                  Acciones
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -118,16 +124,60 @@ const WarehousesWidget = () => {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {row._id}
+                      <Typography
+                        variant="body2"
+                        fontWeight={"light"}
+                        sx={{ fontSize: 15 }}
+                        color="dark"
+                        gutterBottom
+                      >
+                        {row._id}
+                      </Typography>
                     </TableCell>
-                    <TableCell align="right">{row.name}</TableCell>
-                    <TableCell align="right">{row.location}</TableCell>
+                    <TableCell align="right">
+                      <Typography
+                        variant="body2"
+                        fontWeight={"light"}
+                        sx={{ fontSize: 16 }}
+                        color="dark"
+                        gutterBottom
+                      >
+                        {row.name}
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="right">
+                      <Typography
+                        variant="body2"
+                        fontWeight={"light"}
+                        sx={{ fontSize: 16 }}
+                        color="dark"
+                        gutterBottom
+                      >
+                        {row.location}
+                      </Typography>
+                    </TableCell>
                     <TableCell align="right">
                       <Button onClick={() => handleUpdate(row._id)}>
-                        Editar
+                        <Typography
+                          variant="body2"
+                          fontWeight={"light"}
+                          sx={{ fontSize: 14 }}
+                          color="dark"
+                          gutterBottom
+                        >
+                          Editar
+                        </Typography>
                       </Button>
                       <Button onClick={() => handleDelete(row._id)}>
-                        Eliminar
+                        <Typography
+                          variant="body2"
+                          fontWeight={"light"}
+                          sx={{ fontSize: 14 }}
+                          color="dark"
+                          gutterBottom
+                        >
+                          Eliminar
+                        </Typography>
                       </Button>
                     </TableCell>
                   </TableRow>
