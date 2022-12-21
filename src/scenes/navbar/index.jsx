@@ -98,7 +98,7 @@ const Navbar = () => {
               <MenuItem value={userEmail}>
                 <Typography>{userEmail}</Typography>
               </MenuItem>
-              <MenuItem onClick={() => handleLogout()}>Log out</MenuItem>
+              <MenuItem onClick={() => handleLogout()}>Cerrar sesión</MenuItem>
             </Select>
           </FormControl>
         </FlexBetween>
@@ -167,7 +167,9 @@ const Navbar = () => {
                 <MenuItem value={userEmail}>
                   <Typography>{userEmail}</Typography>
                 </MenuItem>
-                <MenuItem onClick={() => handleLogout()}>Log out</MenuItem>
+                <MenuItem onClick={() => handleLogout()}>
+                  Cerrar sesión
+                </MenuItem>
               </Select>
             </FormControl>
           </FlexBetween>
