@@ -57,7 +57,7 @@ const LoginPage = () => {
         backgroundColor={theme.palette.background.alt}
       >
         <Typography fontWeight="500" varian="h5" sx={{ mb: "1.5rem" }}>
-          Bienvenido a Coreware, soluciones de Hardware.
+          Bienvenido al portal de administración de Coreware.
         </Typography>
         <Form />
       </Box>
