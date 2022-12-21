@@ -26,7 +26,7 @@ const Hero = () => {
               margin: "0 0 2rem 0",
             }}
           >
-            Portal de administración Codeware
+            Portal de administración Coreware
           </Typography>
         </FlexCenter>
       </Box>

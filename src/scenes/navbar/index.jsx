@@ -51,7 +51,7 @@ const Navbar = () => {
             },
           }}
         >
-          Codeware &trade;
+          Coreware &trade;
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween

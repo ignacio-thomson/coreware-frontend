@@ -35,7 +35,7 @@ const LoginPage = () => {
           textAlign="start"
         >
           <Typography fontWeight="bold" fontSize="32px" color="primary">
-            Codeware &trade;
+            Coreware &trade;
           </Typography>
         </Box>
         <Box>
